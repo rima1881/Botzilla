@@ -1,10 +1,10 @@
 package message
 
-func (m Message) serialize() string {
+func (m Message) Serialize() string {
 	return "get serialized"
 }
 
-func deserialize() *Message {
+func Deserialize(rawData []byte) *Message {
 
 	// get deserialized :O
 	return nil

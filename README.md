@@ -8,14 +8,18 @@ For now, I've identified three main types of communication:
 - Continuous Data Flow:
 This includes scenarios where data needs to be sent and received continuously, such as with cameras, sensors, or any variable that requires a constant stream of information.
 
-- Request-Response (End-to-End):
+- Request-Response (End-to-End or Broadcast):
 This is the classic request-response model, where a request is sent and a corresponding response is received, commonly used for communication between a sender and a receiver.
 
-- Broadcast Commands:
-This type is used when a command needs to be sent to multiple recipients at once, ensuring that all relevant components receive the message.
+# Data Structure
 
-# Structure
+## Continuous Data
+Currently, continuous data is transmitted using the WebSocket protocol. Every component that generates continuous data will automatically begin sending it to Bozilla upon establishing an initial connection. Other components can access this data in real time by opening their own WebSocket connection to Bozilla, or they can retrieve the latest data snapshot via a TCP connection (though this snapshot may have some delay).
 
+Examples: Sensors, Camera Modules
+
+## Discrete Data
+All discrete data is sent via TCP connections. Each TCP connection includes a header specifying the intended target(s) for the data, which can be either a single component or an array of components. Responses include the IDs of the devices that acknowledged the data along with their respective response codes.
 
 
 # Registery
