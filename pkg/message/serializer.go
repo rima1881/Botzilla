@@ -1,11 +1,26 @@
 package message
 
-func (m Message) Serialize() string {
-	return "get serialized"
+import "encoding/json"
+
+func (m Message) Serialize() ([]byte, error) {
+
+	data, err := json.Marshal(m)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
 }
 
-func Deserialize(rawData []byte) *Message {
+func Deserialize(rawData []byte) (Message, error) {
 
-	// get deserialized :O
-	return nil
+	var message Message
+	err := json.Unmarshal(rawData, &message)
+
+	if err != nil {
+		return Message{}, err
+	}
+
+	return message, nil
+
 }

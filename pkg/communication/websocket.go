@@ -1,7 +1,13 @@
 package communication
 
-import "botzilla/pkg/message"
+import (
+	"fmt"
+)
 
-func sendMessage(ip string, port string, msg message.Message) {
+func StartWebsocketServer() {
 
+	fmt.Println("starting web socketserver")
+
+	for {
+	}
 }

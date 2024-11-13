@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func StartListener() {
+func StartTCPServer() {
 
 	listener, err := net.Listen("tcp", ":8080")
 	if err != nil {
@@ -45,12 +45,15 @@ func handleMaster(conn net.Conn) {
 		return
 	}
 
-	message := message.Deserialize(rawMessage)
+	message, err := message.Deserialize(rawMessage)
+	if err != nil {
+		fmt.Println("There was an error decoding :\n", err)
+	}
 
-	print(message)
+	fmt.Println(message)
 
 }
 
-func handleRequest(conn net.Conn) {
+func sendResponse() {
 
 }

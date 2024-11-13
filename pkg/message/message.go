@@ -1,22 +1,16 @@
 package message
 
-type selectorType int
-
-const (
-	IDSelector    = iota
-	classSelector = iota
-)
-
-func (s selectorType) Index() int {
-	return int(s)
-}
-
-type messageHeader struct {
-	selectorType string
-	selector     string
-}
-
 type Message struct {
-	header []messageHeader
-	body   string
+	Header []string
+	Body   string
 }
+
+func (m Message) String() string {
+	return m.Body
+}
+
+/*
+	For now message headers only include
+	the device ids but in future device
+	grouping will be implemented
+*/

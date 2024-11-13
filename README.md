@@ -3,7 +3,7 @@ Botzilla serves as the core protocol facilitating communication between the vari
 
 Command Types
 
-For now, I've identified three main types of communication:
+For now, I've identified two main types of communication:
 
 - Continuous Data Flow:
 This includes scenarios where data needs to be sent and received continuously, such as with cameras, sensors, or any variable that requires a constant stream of information.
@@ -24,6 +24,9 @@ All discrete data is sent via TCP connections. Each TCP connection includes a he
 
 # Registery
 Upon activation, each component will send a packet to Botzilla to register itself. From then on, Botzilla will periodically send packets to verify if the components are still active.
+
+# Serialization
+Currently, all data is transmitted in JSON format, but this will be changed in the future to use byte codes for improved efficiency.
 
 # Logging / Debugging
 All the data is sent to a simple application for debugging purposes, which can be found here.
