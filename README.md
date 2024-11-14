@@ -21,6 +21,13 @@ Examples: Sensors, Camera Modules
 ## Discrete Data
 All discrete data is sent via TCP connections. Each TCP connection includes a header specifying the intended target(s) for the data, which can be either a single component or an array of components. Responses include the IDs of the devices that acknowledged the data along with their respective response codes.
 
+# Command Handler
+Botzilla itself is a component that can be connected to. The ID of Botzilla is "0000" and it doesn't belong to any group. Here are the list of commands:
+- "0000" : Connect
+- "0001" : Get connected components
+- "0002" : Create A new Group
+- "0003" | "Group Id" : Assign the component to Group
+- "0004" | "Group Id" : Remove the component from Group
 
 # Registery
 Upon activation, each component will send a packet to Botzilla to register itself. From then on, Botzilla will periodically send packets to verify if the components are still active.

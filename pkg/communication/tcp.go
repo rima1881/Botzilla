@@ -21,20 +21,17 @@ func StartTCPServer() {
 
 	for {
 
-		connMaster, err := listener.Accept()
-
+		conn, err := listener.Accept()
 		if err != nil {
 			fmt.Println("Error accepting connection: \n", err)
 			continue
 		}
 
-		go handleMaster(connMaster)
-
+		go handleConnection(conn)
 	}
-
 }
 
-func handleMaster(conn net.Conn) {
+func handleConnection(conn net.Conn) {
 
 	// Might need to change :O
 	rawMessage := make([]byte, 1024)
@@ -51,7 +48,6 @@ func handleMaster(conn net.Conn) {
 	}
 
 	fmt.Println(message)
-
 }
 
 func sendResponse() {
