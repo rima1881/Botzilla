@@ -1,6 +1,7 @@
 package communication
 
 import (
+	"botzilla/pkg/command"
 	"botzilla/pkg/message"
 	"fmt"
 	"net"
@@ -19,6 +20,9 @@ func StartTCPServer() {
 
 	fmt.Println("Botzilla has started on port 8080")
 
+	// Router decides what to do with incomming commands
+	router := command.NewCommandRouter()
+
 	for {
 
 		conn, err := listener.Accept()
@@ -27,11 +31,11 @@ func StartTCPServer() {
 			continue
 		}
 
-		go handleConnection(conn)
+		go handleConnection(conn, router)
 	}
 }
 
-func handleConnection(conn net.Conn) {
+func handleConnection(conn net.Conn, router *command.CommandRouter) {
 
 	// Might need to change :O
 	rawMessage := make([]byte, 1024)
@@ -47,9 +51,6 @@ func handleConnection(conn net.Conn) {
 		fmt.Println("There was an error decoding :\n", err)
 	}
 
-	fmt.Println(message)
-}
-
-func sendResponse() {
+	router.Route(&message)
 
 }
