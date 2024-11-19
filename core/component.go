@@ -1,10 +1,15 @@
 package core
 
 type Component struct {
-	name             string
-	TCPAddress       string
-	websocketAddress string
-	group            []string
+	Name       string
+	TCPAddress string
+	group      []string
 }
 
-func (c Component) sendCommnad(p)
+func NewComponent(name string, address string) *Component {
+	return &Component{
+		Name:       name,
+		TCPAddress: address,
+		group:      []string{},
+	}
+}

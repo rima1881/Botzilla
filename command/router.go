@@ -53,7 +53,7 @@ func sendToSelf(p packet) (string, error) {
 
 	command := p.body[:4]
 
-	handler := core.GetHandler(command)
+	handler := core.HandlerMap[command]
 
 	if handler == nil {
 		return "wrong command id", nil

@@ -2,33 +2,44 @@ package core
 
 import (
 	"fmt"
+	"log"
+	"strings"
 )
 
-func GetHandler(cmd string) func(data string) (string, error) {
+var HandlerMap = map[string]func(data string) (string, error){
+	"0000": registerComponent,
+	"0001": getComponents,
+	"0002": createGroup,
+	"0003": assignGroup,
+	"0004": removeGroup,
+}
 
-	switch cmd {
-	case "0000":
-		return connect
-	case "0001":
-		return getComponents
-	case "0002":
-		return createGroup
-	case "0003":
-		return assignGroup
-	case "0004":
-		return removeGroup
+func registerComponent(data string) (string, error) {
+	// Log the action
+	log.Println("Handling register command")
+
+	registery := GetRegistery()
+
+	// Check if message content was valid
+	splitedData := strings.Split(data, ",")
+	if len(splitedData) != 2 {
+		return "", fmt.Errorf("invalid data format: expected 2 components, got %d", len(splitedData))
 	}
 
-	return nil
+	// Check if the component already exists
+	isThere := registery.ComponentExists(splitedData[0])
+	if isThere {
+		return "", fmt.Errorf("component with name '%s' already exists", splitedData[0])
+	}
+
+	// Create a new component using the data
+	comp := NewComponent(splitedData[0], splitedData[1])
+	registery.AddComponent(comp)
+
+	return "Device registered successfully", nil
 }
 
-func connect(data string) (string, error) {
-	// Process connect command
-	fmt.Println("Handling connect command")
-	return "Device register", nil
-}
-
-func getComponents(data string) (string, error) {
+func getComponents(_ string) (string, error) {
 	fmt.Println("Returning all registered Componets")
 
 	return "device list:", nil
