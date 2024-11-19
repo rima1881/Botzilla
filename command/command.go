@@ -33,6 +33,8 @@ func Start(port int) {
 
 func requestHandler(conn net.Conn) {
 
+	defer conn.Close()
+
 	// Might need to change :O
 	rawMessage := make([]byte, 1024)
 	_, err := conn.Read(rawMessage)
@@ -46,7 +48,5 @@ func requestHandler(conn net.Conn) {
 	response, err := route(request)
 
 	conn.Write([]byte(response))
-
-	conn.Close()
 
 }

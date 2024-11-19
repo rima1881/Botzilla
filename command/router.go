@@ -22,6 +22,10 @@ func sendToSelf(p packet) (string, error) {
 
 	handler := core.GetHandler(command)
 
+	if handler == nil {
+		return "wrong command id", nil
+	}
+
 	return handler(p.body)
 
 }
