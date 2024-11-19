@@ -2,7 +2,9 @@ package core
 
 type Component struct {
 	name             string
-	tcpAddress       string
+	TCPAddress       string
 	websocketAddress string
 	group            []string
 }
+
+func (c Component) sendCommnad(p)

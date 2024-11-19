@@ -8,7 +8,7 @@ import (
 
 func Start(port int) {
 
-	listener, err := net.Listen("tcp", ":8080")
+	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {
 		fmt.Println("There was an error starting the server: \n", err)
 		os.Exit(1)
