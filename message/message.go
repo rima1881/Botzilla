@@ -1,5 +1,7 @@
 package message
 
-func Start(port int) {
+import "net"
+
+func Handler(conn net.Conn) {
 
 }

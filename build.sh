@@ -1,2 +1,2 @@
-go build -o bin/botzilla ./cmd
+go build -o bin/botzilla ./main.go
 go test -v ./test

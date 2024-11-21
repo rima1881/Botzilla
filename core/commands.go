@@ -9,7 +9,7 @@ import (
 var HandlerMap = map[string]func(data string) (string, error){
 	"0000": registerComponent,
 	"0001": getComponents,
-	"0002": createGroup,
+	"0002": getGroup,
 	"0003": assignGroup,
 	"0004": removeGroup,
 }
@@ -42,13 +42,19 @@ func registerComponent(data string) (string, error) {
 func getComponents(_ string) (string, error) {
 	fmt.Println("Returning all registered Componets")
 
-	return "device list:", nil
+	registery := GetRegistery()
+
+	result := ""
+
+	for name := range registery.components {
+		result += name + ","
+	}
+
+	return result, nil
 }
 
-func createGroup(data string) (string, error) {
-	fmt.Println("Creating Group")
-
-	return "group created:", nil
+func getGroup(groupId string) (string, error) {
+	return "", nil
 }
 
 func assignGroup(data string) (string, error) {
