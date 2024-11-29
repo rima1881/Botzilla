@@ -2,12 +2,15 @@ package command
 
 import (
 	"botzilla/core"
+	"fmt"
 	"net"
 )
 
 func route(p packet) (string, error) {
 
-	if p.follower == "0000" {
+	fmt.Println(p)
+
+	if p.Follower == "0000" {
 		return sendToSelf(p)
 	}
 
@@ -19,7 +22,7 @@ func sendToFollower(p packet) (string, error) {
 
 	registery := core.GetRegistery()
 
-	follower := registery.GetComponent(p.follower)
+	follower := registery.GetComponent(p.Follower)
 	address := follower.TCPAddress
 
 	conn, err := net.Dial("tcp", address)
@@ -51,7 +54,7 @@ func sendToFollower(p packet) (string, error) {
 
 func sendToSelf(p packet) (string, error) {
 
-	command := p.body[:4]
+	command := p.Body[:4]
 
 	handler := core.HandlerMap[command]
 
@@ -59,6 +62,6 @@ func sendToSelf(p packet) (string, error) {
 		return "wrong command id", nil
 	}
 
-	return handler(p.body)
+	return handler(p.Body)
 
 }
