@@ -36,7 +36,11 @@ func registerComponent(data string) (string, error) {
 	comp := NewComponent(splitedData[0], splitedData[1])
 	registery.AddComponent(comp)
 
-	return "Device registered successfully", nil
+	// TODO
+	// Somehow generate a token please
+	token := "mammad123"
+
+	return token, nil
 }
 
 func getComponents(_ string) (string, error) {
