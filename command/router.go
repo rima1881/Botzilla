@@ -62,6 +62,6 @@ func sendToSelf(p packet) (string, error) {
 		return "wrong command id", nil
 	}
 
-	return handler(p.Body)
+	return handler(p.Body[4:])
 
 }
