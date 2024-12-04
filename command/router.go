@@ -36,10 +36,8 @@ func sendToFollower(p packet) (string, error) {
 		return "", err
 	}
 
-	_, err = conn.Write(message)
-	if err != nil {
-		return "", err
-	}
+	conn.Write(message)
+	conn.Write([]byte("\n"))
 
 	// Read the response from the server
 	buffer := make([]byte, 1024)
