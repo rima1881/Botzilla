@@ -1,5 +1,9 @@
 # Botzilla
+
 Botzilla serves as the core protocol facilitating communication between the various components of my robot. It acts as the hub, overseeing all the messages exchanged within the system. While this approach introduces a small amount of delay in the messaging process, it's easier to implement.
+
+`Important`: The current documentation is outdated and no longer valid. It will be rewritten once the updates are completed and the system reaches a stable state.
+---
 
 Command Types
 
